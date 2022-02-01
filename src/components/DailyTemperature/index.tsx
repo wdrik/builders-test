@@ -3,12 +3,12 @@ import { ILocation } from '../../pages';
 import { Container } from './styles';
 
 interface IDailyTemperatureProps {
-  location: ILocation;
+  active?: boolean;
 }
 
-export default function DailyTemperature() {
+export default function DailyTemperature(props: IDailyTemperatureProps) {
   return (
-    <Container>
+    <Container className={`${props.active && `active`}`}>
       <span className="day">ter.</span>
 
       <figure>

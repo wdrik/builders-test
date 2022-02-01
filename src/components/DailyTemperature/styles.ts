@@ -7,9 +7,21 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
-  background: ${({ theme }) => theme.colors.darkGray};
   border-radius: 8px;
   padding: 8px;
+
+  transition: background-color ease-in-out 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.darkGray};
+    filter: brightness(0.8);
+  }
+
+  &.active {
+    background-color: ${({ theme }) => theme.colors.darkGray};
+    filter: brightness(1);
+  }
 
   span.day {
     color: ${({ theme }) => theme.colors.white};

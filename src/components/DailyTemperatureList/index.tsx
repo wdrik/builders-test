@@ -9,7 +9,7 @@ interface IDailyTemperatureListProps {
 export default function DailyTemperatureList() {
   return (
     <Container>
-      <DailyTemperature />
+      <DailyTemperature active={true} />
       <DailyTemperature />
       <DailyTemperature />
       <DailyTemperature />
