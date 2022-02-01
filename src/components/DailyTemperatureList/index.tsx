@@ -10,6 +10,10 @@ export default function DailyTemperatureList() {
   return (
     <Container>
       <DailyTemperature />
+      <DailyTemperature />
+      <DailyTemperature />
+      <DailyTemperature />
+      <DailyTemperature />
     </Container>
   );
 }

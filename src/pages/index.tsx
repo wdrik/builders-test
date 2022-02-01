@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import DailyTemperature from '../components/DailyTemperature';
+import DailyTemperatureList from '../components/DailyTemperatureList';
 import Header from '../components/Header';
 import { Container, Main } from './styles';
 
@@ -38,7 +38,7 @@ export default function Home() {
       <Container>
         {location && <Header location={location} />}
 
-        <DailyTemperature />
+        <DailyTemperatureList />
       </Container>
     </Main>
   );
