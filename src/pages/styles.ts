@@ -4,10 +4,6 @@ export const Main = styled.main`
   width: 100%;
   height: 100vh;
 
-  /* background: ${(props) => props.theme.colors.light}; */
-
-  background: blue;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,8 +14,4 @@ export const Container = styled.section`
   height: 100%;
   max-width: 1024px;
   padding: 16px;
-
-  /* background: ${(props) => props.theme.colors.light}; */
-
-  background: green;
 `;

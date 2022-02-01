@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3333/api/',
+  baseURL: 'https://api.openweathermap.org/data/2.5',
 });

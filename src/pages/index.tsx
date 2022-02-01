@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
-import SearchBar from '../components/SearchBar';
+import DailyTemperature from '../components/DailyTemperature';
+import Header from '../components/Header';
 import { Container, Main } from './styles';
 
-export default function Home() {
-  const [location, setLocation] =
-    useState<{ latitude: number; longitude: number }>();
+export interface ILocation {
+  latitude: number;
+  longitude: number;
+}
 
-  const apiKey = 'ea3f03f9a628d010be779f05595d5c49';
+export default function Home() {
+  const [location, setLocation] = useState<ILocation>();
 
   useEffect(() => {
     if (!navigator.geolocation) {
       console.log('Geolocation is not supported.');
+
       return;
     }
 
@@ -32,10 +36,9 @@ export default function Home() {
   return (
     <Main>
       <Container>
-        <SearchBar />
+        {location && <Header location={location} />}
 
-        <h2>latitude: {location?.latitude} </h2>
-        <h2>longitude: {location?.longitude} </h2>
+        <DailyTemperature />
       </Container>
     </Main>
   );

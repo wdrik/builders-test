@@ -2,9 +2,9 @@ const theme = {
   colors: {
     primary: 'blue',
 
-    dark: '#333333',
-    gray: '#999999',
-    light: '#EEEEEE',
+    dark: '#202124',
+    darkGray: '#303134',
+    light: '#9aa0a6',
     white: '#FFFFFF',
   },
 };

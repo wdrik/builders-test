@@ -9,9 +9,12 @@ export default createGlobalStyle`
   }
 
   body {
+    background: ${(props) => props.theme.colors.dark};
+    color: ${({ theme }) => theme.colors.light};
+
+    font: 400 15px Roboto, sans-serif;
 		width: 100%;
 		height: 100vh;
 
-    font: 400 15px Roboto, sans-serif;
   }
 `;
