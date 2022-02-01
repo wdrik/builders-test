@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
+import SearchBar from '../components/SearchBar';
+import { Container, Main } from './styles';
 
 export default function Home() {
-  const [location, setLocation] = useState<any>();
+  const [location, setLocation] =
+    useState<{ latitude: number; longitude: number }>();
+
+  const apiKey = 'ea3f03f9a628d010be779f05595d5c49';
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -10,11 +15,13 @@ export default function Home() {
     }
 
     navigator.geolocation.getCurrentPosition(
-      (position: any) => {
+      (position: GeolocationPosition) => {
         const { latitude, longitude } = position.coords;
 
-        console.log(`latitude: `, latitude);
-        console.log(`longitude: `, longitude);
+        setLocation({
+          latitude,
+          longitude,
+        });
       },
       (error: any) => {
         console.log(`error: `, error);
@@ -23,10 +30,13 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <main>
-        <h2>Hello World!</h2>
-      </main>
-    </>
+    <Main>
+      <Container>
+        <SearchBar />
+
+        <h2>latitude: {location?.latitude} </h2>
+        <h2>longitude: {location?.longitude} </h2>
+      </Container>
+    </Main>
   );
 }

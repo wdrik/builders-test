@@ -7,11 +7,11 @@ export default createGlobalStyle`
     box-sizing: border-box;
     outline: none;
   }
-  
+
   body {
-    background: ${(props) => props.theme.colors.light};
-    color: ${({ theme }) => theme.colors.gray};
-    
+		width: 100%;
+		height: 100vh;
+
     font: 400 15px Roboto, sans-serif;
   }
 `;
