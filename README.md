@@ -16,7 +16,7 @@ yarn dev
 
 ## Dependency
 
-add file env.local with this value key: NEXT_PUBLIC_OPEN_WEATHER_KEY=ea3f03f9a628d010be779f05595d5c49
+Add file env.local with this value key: NEXT_PUBLIC_OPEN_WEATHER_KEY=ea3f03f9a628d010be779f05595d5c49
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -52,6 +52,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out our [Builders Test deployment](https://builders-test.vercel.app/) for more details.
