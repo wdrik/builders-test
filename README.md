@@ -4,19 +4,25 @@
   <h2 align="center">Test Front-end Builders :v:</h2>
 </p>
 
+## Dependency
+
+Add file env.local with this value key: NEXT_PUBLIC_OPEN_WEATHER_KEY=ea3f03f9a628d010be779f05595d5c49
+
 ## Getting Started
 
 First, run the development server:
 
 ```bash
+npm install
+# or
+yarn
+
+# and
+
 npm run dev
 # or
 yarn dev
 ```
-
-## Dependency
-
-Add file env.local with this value key: NEXT_PUBLIC_OPEN_WEATHER_KEY=ea3f03f9a628d010be779f05595d5c49
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
