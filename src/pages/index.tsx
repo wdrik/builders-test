@@ -7,8 +7,6 @@ import { api } from '../services/api';
 import LineChart from '../components/LineChart';
 import BarChart from '../components/BarChart';
 
-const apiKey = 'ea3f03f9a628d010be779f05595d5c49';
-
 export interface ILocation {
   latitude: number;
   longitude: number;
@@ -78,7 +76,7 @@ export default function Home() {
       if (!location) return;
 
       const { data } = await api.get(
-        `/onecall?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&exclude=minutely&units=metric&appid=${apiKey}`
+        `/onecall?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&exclude=minutely&units=metric&appid=${process.env.OPEN_WEATHER_KEY}`
       );
 
       setLocationData(data);

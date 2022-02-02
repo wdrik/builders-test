@@ -20,8 +20,6 @@ interface ILocationData {
   icon: string;
 }
 
-const apiKey = 'ea3f03f9a628d010be779f05595d5c49';
-
 export default function Header({ location }: ILocationProps) {
   const [locationData, setLocationData] = useState<ILocationData>(
     {} as ILocationData
@@ -32,7 +30,7 @@ export default function Header({ location }: ILocationProps) {
       if (!location) return;
 
       const { data } = await api.get(
-        `/weather?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&units=metric&appid=${apiKey}`
+        `/weather?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&units=metric&appid=${process.env.OPEN_WEATHER_KEY}`
       );
 
       console.log(`header`, data);
