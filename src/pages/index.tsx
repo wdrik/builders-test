@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import DailyTemperatureList from '../components/DailyTemperatureList';
 import Header from '../components/Header';
-import { Container, Main } from './styles';
+import { Container, Main, Tab, TabContent, TabHeader, TabItem } from './styles';
 import { api } from '../services/api';
 import LineChart from '../components/LineChart';
+import BarChart from '../components/BarChart';
 
 const apiKey = 'ea3f03f9a628d010be779f05595d5c49';
 
@@ -34,8 +35,9 @@ export type IDaily = {
 };
 
 export type IHourly = {
-  humidity?: number;
-  temp?: number;
+  humidity: number;
+  temp: number;
+  dt: number;
 };
 
 export interface ILocationData {
@@ -47,6 +49,7 @@ export interface ILocationData {
 export default function Home() {
   const [location, setLocation] = useState<ILocation>();
   const [locationData, setLocationData] = useState<ILocationData>();
+  const [chartType, setChartType] = useState<'temp' | 'humidity'>('temp');
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -89,7 +92,33 @@ export default function Home() {
       <Container>
         {location && <Header location={location} />}
 
-        {locationData && <LineChart {...locationData} />}
+        <Tab>
+          <TabHeader>
+            <TabItem
+              type="button"
+              onClick={() => setChartType('temp')}
+              className={`${chartType === 'temp' && 'active'}`}
+            >
+              Temperatura
+            </TabItem>
+            |
+            <TabItem
+              type="button"
+              onClick={() => setChartType('humidity')}
+              className={`${chartType === 'humidity' && 'active'}`}
+            >
+              Umidade
+            </TabItem>
+          </TabHeader>
+
+          <TabContent>
+            {chartType === 'temp' ? (
+              <>{locationData && <LineChart {...locationData} />}</>
+            ) : (
+              <>{locationData && <BarChart {...locationData} />}</>
+            )}
+          </TabContent>
+        </Tab>
 
         {locationData && <DailyTemperatureList {...locationData} />}
       </Container>

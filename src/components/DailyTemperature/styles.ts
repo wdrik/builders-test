@@ -33,7 +33,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
 
-    .min {
+    .max {
       color: ${({ theme }) => theme.colors.white};
       margin-right: 6px;
     }

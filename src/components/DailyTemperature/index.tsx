@@ -33,8 +33,8 @@ export default function DailyTemperature(props: IDailyTemperatureProps) {
       </figure>
 
       <div>
-        <span className="min">{props.weather.min.toString().slice(0, 4)}°</span>
-        <span className="max">{props.weather.max.toString().slice(0, 4)}°</span>
+        <span className="max">{props.weather.max}° -</span>
+        <span className="min">{props.weather.min}°</span>
       </div>
     </Container>
   );

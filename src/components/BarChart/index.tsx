@@ -1,20 +1,18 @@
-import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
 } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
@@ -22,7 +20,7 @@ ChartJS.register(
 
 import { ILocationData } from '../../pages';
 
-const options = {
+export const options = {
   responsive: true,
   plugins: {
     legend: {
@@ -35,7 +33,7 @@ function handleAddDigits(n: number): string {
   return (n < 10 ? '0' : '') + n;
 }
 
-export default function LineChart(props: ILocationData) {
+export default function BarChart(props: ILocationData) {
   const data = {
     labels: props?.hourly
       .map((item) => {
@@ -48,16 +46,16 @@ export default function LineChart(props: ILocationData) {
       {
         data: props?.hourly
           .map((item) => {
-            return Number(item.temp?.toString().slice(0, 4));
+            return Number(item.humidity?.toString().slice(0, 4));
           })
           .slice(0, 20),
-        borderColor: '#fff6a8',
-        backgroundColor: '#fff6a8',
+        borderColor: '#a1dafb',
+        backgroundColor: '#a1dafb',
         borderWidth: 2,
         tenstion: 0.4,
       },
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return <Bar options={options} data={data} />;
 }

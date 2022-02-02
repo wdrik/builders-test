@@ -43,9 +43,9 @@ export default function Header({ location }: ILocationProps) {
         weatherDescription: data.weather[0].description,
         weatherIcon: data.weather[0].icon,
         humidity: data.main.humidity,
-        min: data.main.temp_min,
-        max: data.main.temp_max,
-        temperature: data.main.temp,
+        min: data.main.temp_min.toString().slice(0, 4),
+        max: data.main.temp_max.toString().slice(0, 4),
+        temperature: data.main.temp.toString().slice(0, 4),
         icon: data.weather[0].icon,
       });
     }
