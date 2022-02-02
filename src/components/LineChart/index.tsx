@@ -8,6 +8,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  registerables,
 } from 'chart.js';
 
 ChartJS.register(
@@ -29,6 +30,7 @@ const options = {
       display: false,
     },
   },
+  maintainAspectRatio: false,
 };
 
 function handleAddDigits(n: number): string {
@@ -49,8 +51,10 @@ export default function LineChart(props: ILocationData) {
         }),
         borderColor: '#fff6a8',
         backgroundColor: '#fff6a8',
-        borderWidth: 2,
-        tenstion: 0.4,
+        fill: false,
+        tension: 0.4,
+        pointBackgroundColor: 'transparent',
+        pointBorderWidth: 0,
       },
     ],
   };

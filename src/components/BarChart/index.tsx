@@ -27,6 +27,7 @@ export const options = {
       display: false,
     },
   },
+  maintainAspectRatio: false,
 };
 
 function handleAddDigits(n: number): string {
@@ -45,8 +46,8 @@ export default function BarChart(props: ILocationData) {
         data: props?.hourly.map((item) => {
           return Number(item.humidity?.toString().slice(0, 4));
         }),
-        borderColor: '#a1dafb',
-        backgroundColor: '#a1dafb',
+        borderColor: 'rgba(187, 241, 255, 0.8)',
+        backgroundColor: 'rgba(187, 241, 255, 0.1)',
         borderWidth: 2,
         tenstion: 0.4,
       },
