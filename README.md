@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="https://github.com/wdrik/meli-test-frontend/blob/main/public/logo.png" />
+  <img src="https://github.com/wdrik/builders-test/blob/main/public/images/logo.png" />
 
-  <h2 align="center">Test Front-end Mercado Livre :v:</h2>
+  <h2 align="center">Test Front-end Builders :v:</h2>
 </p>
 
 ## Getting Started
