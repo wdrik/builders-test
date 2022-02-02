@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 20%;
+  flex: 1;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,17 +11,17 @@ export const Container = styled.div`
   border-radius: 8px;
   padding: 8px;
 
-  transition: background-color ease-in-out 0.2s;
+  transition: background-color ease-in-out 0.4s;
   cursor: pointer;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.darkGray};
-    filter: brightness(0.8);
-  }
 
   &.active {
     background-color: ${({ theme }) => theme.colors.darkGray};
     filter: brightness(1);
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.darkGray};
+    filter: brightness(0.8);
   }
 
   span.day {

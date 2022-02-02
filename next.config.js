@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['images.prismic.io'],
+    domains: ['openweathermap.org'],
   },
 };
 

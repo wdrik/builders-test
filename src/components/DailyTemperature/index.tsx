@@ -1,19 +1,30 @@
 import Image from 'next/image';
-import { ILocation } from '../../pages';
 import { Container } from './styles';
+
+type IWeather = {
+  icon: string;
+  day: number;
+  min: number;
+  max: number;
+};
 
 interface IDailyTemperatureProps {
   active?: boolean;
+  weather: IWeather;
 }
 
 export default function DailyTemperature(props: IDailyTemperatureProps) {
+  const date = new Date(props.weather.day * 1000);
+
+  const week = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
   return (
     <Container className={`${props.active && `active`}`}>
-      <span className="day">ter.</span>
+      <span className="day">{week[date.getDay()]}.</span>
 
       <figure>
         <Image
-          src="/images/partly_cloudy.png"
+          src={`http://openweathermap.org/img/wn/${props.weather.icon}@2x.png`}
           alt="Partly"
           width={48}
           height={48}
@@ -22,8 +33,8 @@ export default function DailyTemperature(props: IDailyTemperatureProps) {
       </figure>
 
       <div>
-        <span className="min">29°</span>
-        <span className="max">22°</span>
+        <span className="min">{props.weather.min.toString().slice(0, 4)}°</span>
+        <span className="max">{props.weather.max.toString().slice(0, 4)}°</span>
       </div>
     </Container>
   );

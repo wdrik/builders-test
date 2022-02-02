@@ -3,64 +3,50 @@ import { useEffect, useState } from 'react';
 import DailyTemperatureList from '../components/DailyTemperatureList';
 import Header from '../components/Header';
 import { Container, Main } from './styles';
+import { api } from '../services/api';
+import LineChart from '../components/LineChart';
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-
-import { Line } from 'react-chartjs-2';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Line Chart',
-    },
-  },
-};
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [120, 110, 120, 130, 138, 120, 124],
-      borderColor: 'rgb(255, 239, 99)',
-      backgroundColor: 'rgb(255, 239, 99)',
-    },
-  ],
-};
+const apiKey = 'ea3f03f9a628d010be779f05595d5c49';
 
 export interface ILocation {
   latitude: number;
   longitude: number;
 }
 
+type IAlert = {
+  sender_name: string;
+  event: string;
+  description: string;
+};
+
+type IWeather = {
+  description: string;
+  icon: string;
+};
+
+export type IDaily = {
+  dt: number;
+  temp: {
+    min: number;
+    max: number;
+  };
+  weather: IWeather[];
+};
+
+export type IHourly = {
+  humidity?: number;
+  temp?: number;
+};
+
+export interface ILocationData {
+  alerts: IAlert[];
+  daily: IDaily[];
+  hourly: IHourly[];
+}
+
 export default function Home() {
   const [location, setLocation] = useState<ILocation>();
+  const [locationData, setLocationData] = useState<ILocationData>();
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -84,14 +70,28 @@ export default function Home() {
     );
   }, []);
 
+  useEffect(() => {
+    async function fetchLocationData() {
+      if (!location) return;
+
+      const { data } = await api.get(
+        `/onecall?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&exclude=minutely&units=metric&appid=${apiKey}`
+      );
+
+      setLocationData(data);
+    }
+
+    fetchLocationData();
+  }, [location]);
+
   return (
     <Main>
       <Container>
         {location && <Header location={location} />}
 
-        <Line options={options} data={data} />
+        {locationData && <LineChart {...locationData} />}
 
-        <DailyTemperatureList />
+        {locationData && <DailyTemperatureList {...locationData} />}
       </Container>
     </Main>
   );

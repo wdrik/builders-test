@@ -1,19 +1,24 @@
-import { ILocation } from '../../pages';
+import { ILocationData } from '../../pages';
 import DailyTemperature from '../DailyTemperature';
 import { Container } from './styles';
 
-interface IDailyTemperatureListProps {
-  location: ILocation;
-}
+export default function DailyTemperatureList(props: ILocationData) {
+  const daily = props.daily.slice(0, 5);
 
-export default function DailyTemperatureList() {
   return (
     <Container>
-      <DailyTemperature active={true} />
-      <DailyTemperature />
-      <DailyTemperature />
-      <DailyTemperature />
-      <DailyTemperature />
+      {daily.map((item) => (
+        <DailyTemperature
+          key={item.dt}
+          active={true}
+          weather={{
+            icon: item.weather[0].icon,
+            day: item.dt,
+            min: item.temp.min,
+            max: item.temp.max,
+          }}
+        />
+      ))}
     </Container>
   );
 }
