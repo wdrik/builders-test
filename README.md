@@ -24,13 +24,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 <p align="left">
   <h3>1 - Allow Location :mag:</h3>
-  <img src="https://github.com/wdrik/builders-test/blob/main/public/screenshot_01.png" />
+  <img src="https://github.com/wdrik/builders-test/blob/main/public/images/screenshot_01.png" />
 
   <h3>2 - Temperature :white_check_mark:</h3>
-  <img src="https://github.com/wdrik/builders-test/blob/main/public/screenshot_02.png" />
+  <img src="https://github.com/wdrik/builders-test/blob/main/public/images/screenshot_02.png" />
 
   <h3>3 - Humidity :clap:</h3>
-  <img src="https://github.com/wdrik/builders-test/blob/main/public/screenshot_03.png" />
+  <img src="https://github.com/wdrik/builders-test/blob/main/public/images/screenshot_03.png" />
 </p>
 
 ## Tests script
