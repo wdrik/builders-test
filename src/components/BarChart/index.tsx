@@ -35,20 +35,16 @@ function handleAddDigits(n: number): string {
 
 export default function BarChart(props: ILocationData) {
   const data = {
-    labels: props?.hourly
-      .map((item) => {
-        const date = new Date(item.dt * 1000);
+    labels: props?.hourly.map((item) => {
+      const date = new Date(item.dt * 1000);
 
-        return `${handleAddDigits(date.getHours())} : 00`;
-      })
-      .slice(0, 20),
+      return `${handleAddDigits(date.getHours())} : 00`;
+    }),
     datasets: [
       {
-        data: props?.hourly
-          .map((item) => {
-            return Number(item.humidity?.toString().slice(0, 4));
-          })
-          .slice(0, 20),
+        data: props?.hourly.map((item) => {
+          return Number(item.humidity?.toString().slice(0, 4));
+        }),
         borderColor: '#a1dafb',
         backgroundColor: '#a1dafb',
         borderWidth: 2,

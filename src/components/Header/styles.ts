@@ -42,4 +42,8 @@ export const LocationInfo = styled.div`
   span {
     display: block;
   }
+
+  .weather-description {
+    text-transform: capitalize;
+  }
 `;

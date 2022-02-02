@@ -25,15 +25,25 @@ export default function Header({ location }: ILocationProps) {
     {} as ILocationData
   );
 
+  const week = [
+    'Domingo',
+    'Segunda-Feira',
+    'Terça-Feira',
+    'Quarta-Feira',
+    'Quinta-Feira',
+    'Sexta-Feira',
+    'Sábado',
+  ];
+
+  const date = new Date();
+
   useEffect(() => {
     async function fetchLocationData() {
       if (!location) return;
 
       const { data } = await api.get(
-        `/weather?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&units=metric&appid=${process.env.OPEN_WEATHER_KEY}`
+        `/weather?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&units=metric&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_KEY}`
       );
-
-      console.log(`header`, data);
 
       setLocationData({
         name: data.name,
@@ -50,6 +60,10 @@ export default function Header({ location }: ILocationProps) {
 
     fetchLocationData();
   }, [location]);
+
+  function handleAddDigits(n: number): string {
+    return (n < 10 ? '0' : '') + n;
+  }
 
   return (
     <Container>
@@ -78,8 +92,16 @@ export default function Header({ location }: ILocationProps) {
           {locationData.name}, {locationData.country}
         </strong>
 
-        <span>Terça-feira, 09:11</span>
-        <span>{locationData.weatherDescription}</span>
+        <span>
+          {week[date.getDay()]},{' '}
+          {`${handleAddDigits(date.getHours())}:${handleAddDigits(
+            date.getMinutes()
+          )}`}
+        </span>
+
+        <span className="weather-description">
+          {locationData.weatherDescription}
+        </span>
       </LocationInfo>
     </Container>
   );

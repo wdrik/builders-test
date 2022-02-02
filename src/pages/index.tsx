@@ -51,7 +51,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      console.log('Geolocation is not supported.');
+      alert('Geolocation is not supported.');
 
       return;
     }
@@ -76,7 +76,7 @@ export default function Home() {
       if (!location) return;
 
       const { data } = await api.get(
-        `/onecall?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&exclude=minutely&units=metric&appid=${process.env.OPEN_WEATHER_KEY}`
+        `/onecall?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&exclude=minutely&units=metric&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_KEY}`
       );
 
       setLocationData(data);
