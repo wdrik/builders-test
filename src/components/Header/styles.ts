@@ -24,6 +24,14 @@ export const WeatherInfo = styled.div`
     display: flex;
     flex-direction: column;
   }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+
+    strong {
+      font-size: 18px;
+    }
+  }
 `;
 
 export const LocationInfo = styled.div`
@@ -45,5 +53,13 @@ export const LocationInfo = styled.div`
 
   .weather-description {
     text-transform: capitalize;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+
+    strong {
+      font-size: 16px;
+    }
   }
 `;

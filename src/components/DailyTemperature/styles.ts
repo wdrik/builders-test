@@ -44,4 +44,20 @@ export const Container = styled.div`
       font-size: 12px;
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 8px 4px;
+
+    div {
+      flex-direction: column;
+
+      .max {
+        font-size: 12px;
+      }
+
+      .min {
+        font-size: 10px;
+      }
+    }
+  }
 `;

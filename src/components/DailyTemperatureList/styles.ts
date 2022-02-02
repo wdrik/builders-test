@@ -10,4 +10,12 @@ export const Container = styled.div`
       margin-right: 12px;
     }
   }
+
+  @media (max-width: 768px) {
+    > div {
+      :not(:last-child) {
+        margin-right: 6px;
+      }
+    }
+  }
 `;
