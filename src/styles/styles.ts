@@ -14,6 +14,11 @@ export const Container = styled.section`
   height: 100%;
   max-width: 1024px;
   padding: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 `;
 
 export const Tab = styled.div`

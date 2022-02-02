@@ -2,21 +2,24 @@ import { useEffect, useState } from 'react';
 
 import DailyTemperatureList from '../components/DailyTemperatureList';
 import Header from '../components/Header';
-import { Container, Main, Tab, TabContent, TabHeader, TabItem } from './styles';
+import {
+  Container,
+  Main,
+  Tab,
+  TabContent,
+  TabHeader,
+  TabItem,
+} from '../styles/styles';
 import { api } from '../services/api';
 import LineChart from '../components/LineChart';
 import BarChart from '../components/BarChart';
+
+import { Rings } from 'react-loader-spinner';
 
 export interface ILocation {
   latitude: number;
   longitude: number;
 }
-
-type IAlert = {
-  sender_name: string;
-  event: string;
-  description: string;
-};
 
 type IWeather = {
   description: string;
@@ -39,14 +42,31 @@ export type IHourly = {
 };
 
 export interface ILocationData {
-  alerts: IAlert[];
   daily: IDaily[];
   hourly: IHourly[];
 }
 
+interface IHeaderLocationData {
+  name: string;
+  country: string;
+  weatherDescription: string;
+  weatherIcon: string;
+  temperature: number;
+  humidity: number;
+  min: number;
+  max: number;
+  icon: string;
+}
+
 export default function Home() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [location, setLocation] = useState<ILocation>();
-  const [locationData, setLocationData] = useState<ILocationData>();
+  const [locationData, setLocationData] = useState<ILocationData>(
+    {} as ILocationData
+  );
+  const [headerLocationData, setHeaderLocationData] =
+    useState<IHeaderLocationData>({} as IHeaderLocationData);
+
   const [chartType, setChartType] = useState<'temp' | 'humidity'>('temp');
 
   useEffect(() => {
@@ -75,11 +95,29 @@ export default function Home() {
     async function fetchLocationData() {
       if (!location) return;
 
-      const { data } = await api.get(
+      const headerResponse = await api.get(
+        `/weather?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&units=metric&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_KEY}`
+      );
+
+      const response = await api.get(
         `/onecall?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&exclude=minutely&units=metric&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_KEY}`
       );
 
-      setLocationData(data);
+      setLocationData(response.data);
+
+      setHeaderLocationData({
+        name: headerResponse.data.name,
+        country: headerResponse.data.sys.country,
+        weatherDescription: headerResponse.data.weather[0].description,
+        weatherIcon: headerResponse.data.weather[0].icon,
+        humidity: headerResponse.data.main.humidity,
+        min: headerResponse.data.main.temp_min.toString().slice(0, 4),
+        max: headerResponse.data.main.temp_max.toString().slice(0, 4),
+        temperature: headerResponse.data.main.temp.toString().slice(0, 4),
+        icon: headerResponse.data.weather[0].icon,
+      });
+
+      setIsLoading(false);
     }
 
     fetchLocationData();
@@ -88,37 +126,43 @@ export default function Home() {
   return (
     <Main>
       <Container>
-        {location && <Header location={location} />}
+        {isLoading ? (
+          <Rings color="#fff6a8" height={80} width={80} />
+        ) : (
+          <>
+            <Header {...headerLocationData} />
 
-        <Tab>
-          <TabHeader>
-            <TabItem
-              type="button"
-              onClick={() => setChartType('temp')}
-              className={`${chartType === 'temp' && 'active'}`}
-            >
-              Temperatura
-            </TabItem>
-            |
-            <TabItem
-              type="button"
-              onClick={() => setChartType('humidity')}
-              className={`${chartType === 'humidity' && 'active'}`}
-            >
-              Umidade
-            </TabItem>
-          </TabHeader>
+            <Tab>
+              <TabHeader>
+                <TabItem
+                  type="button"
+                  onClick={() => setChartType('temp')}
+                  className={`${chartType === 'temp' && 'active'}`}
+                >
+                  Temperatura
+                </TabItem>
+                |
+                <TabItem
+                  type="button"
+                  onClick={() => setChartType('humidity')}
+                  className={`${chartType === 'humidity' && 'active'}`}
+                >
+                  Umidade
+                </TabItem>
+              </TabHeader>
 
-          <TabContent>
-            {chartType === 'temp' ? (
-              <>{locationData && <LineChart {...locationData} />}</>
-            ) : (
-              <>{locationData && <BarChart {...locationData} />}</>
-            )}
-          </TabContent>
-        </Tab>
+              <TabContent>
+                {chartType === 'temp' ? (
+                  <LineChart {...locationData} />
+                ) : (
+                  <BarChart {...locationData} />
+                )}
+              </TabContent>
+            </Tab>
 
-        {locationData && <DailyTemperatureList {...locationData} />}
+            <DailyTemperatureList {...locationData} />
+          </>
+        )}
       </Container>
     </Main>
   );

@@ -32,10 +32,16 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     .max {
       color: ${({ theme }) => theme.colors.white};
       margin-right: 6px;
+      font-size: 16px;
+    }
+
+    .min {
+      font-size: 12px;
     }
   }
 `;

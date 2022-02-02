@@ -4,11 +4,7 @@ import { ILocation } from '../../pages';
 import { api } from '../../services/api';
 import { Container, LocationInfo, WeatherInfo } from './styles';
 
-interface ILocationProps {
-  location: ILocation;
-}
-
-interface ILocationData {
+interface IHeaderLocationDataProps {
   name: string;
   country: string;
   weatherDescription: string;
@@ -20,11 +16,7 @@ interface ILocationData {
   icon: string;
 }
 
-export default function Header({ location }: ILocationProps) {
-  const [locationData, setLocationData] = useState<ILocationData>(
-    {} as ILocationData
-  );
-
+export default function Header(headerLocationData: IHeaderLocationDataProps) {
   const week = [
     'Domingo',
     'Segunda-Feira',
@@ -37,30 +29,6 @@ export default function Header({ location }: ILocationProps) {
 
   const date = new Date();
 
-  useEffect(() => {
-    async function fetchLocationData() {
-      if (!location) return;
-
-      const { data } = await api.get(
-        `/weather?lat=${location.latitude}&lon=${location.longitude}&lang=pt_br&units=metric&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_KEY}`
-      );
-
-      setLocationData({
-        name: data.name,
-        country: data.sys.country,
-        weatherDescription: data.weather[0].description,
-        weatherIcon: data.weather[0].icon,
-        humidity: data.main.humidity,
-        min: data.main.temp_min.toString().slice(0, 4),
-        max: data.main.temp_max.toString().slice(0, 4),
-        temperature: data.main.temp.toString().slice(0, 4),
-        icon: data.weather[0].icon,
-      });
-    }
-
-    fetchLocationData();
-  }, [location]);
-
   function handleAddDigits(n: number): string {
     return (n < 10 ? '0' : '') + n;
   }
@@ -70,7 +38,7 @@ export default function Header({ location }: ILocationProps) {
       <WeatherInfo>
         <figure>
           <Image
-            src={`http://openweathermap.org/img/wn/${locationData.icon}@2x.png`}
+            src={`http://openweathermap.org/img/wn/${headerLocationData.icon}@2x.png`}
             alt="Partly"
             width={64}
             height={48}
@@ -78,18 +46,18 @@ export default function Header({ location }: ILocationProps) {
           />
         </figure>
 
-        <strong>{locationData.temperature} °C</strong>
+        <strong>{headerLocationData.temperature} °C</strong>
 
         <div>
-          <span>Umidade: {locationData.humidity}%</span>
-          <span>Minima: {locationData.min}°</span>
-          <span>Máxima: {locationData.max}°</span>
+          <span>Umidade: {headerLocationData.humidity}%</span>
+          <span>Minima: {headerLocationData.min}°</span>
+          <span>Máxima: {headerLocationData.max}°</span>
         </div>
       </WeatherInfo>
 
       <LocationInfo>
         <strong>
-          {locationData.name}, {locationData.country}
+          {headerLocationData.name}, {headerLocationData.country}
         </strong>
 
         <span>
@@ -100,7 +68,7 @@ export default function Header({ location }: ILocationProps) {
         </span>
 
         <span className="weather-description">
-          {locationData.weatherDescription}
+          {headerLocationData.weatherDescription}
         </span>
       </LocationInfo>
     </Container>
