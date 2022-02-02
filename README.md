@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/wdrik/meli-test-frontend/blob/main/public/logo_ml.png" />
+  <img src="https://github.com/wdrik/meli-test-frontend/blob/main/public/logo.png" />
 
   <h2 align="center">Test Front-end Mercado Livre :v:</h2>
 </p>
