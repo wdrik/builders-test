@@ -15,7 +15,7 @@ interface IDailyTemperatureProps {
   weather: IWeather;
 }
 
-const mook = {
+const mock = {
   weather: {
     icon: '10bn',
     day: 1643817380,
@@ -28,7 +28,7 @@ describe('DailyTemperature Component', () => {
   it('renders correctly min temperature', () => {
     const { debug } = render(
       <ThemeProvider theme={theme}>
-        <DailyTemperature {...mook} />
+        <DailyTemperature {...mock} />
       </ThemeProvider>
     );
 
@@ -40,7 +40,7 @@ describe('DailyTemperature Component', () => {
   it('renders correctly max temperature', () => {
     const { debug } = render(
       <ThemeProvider theme={theme}>
-        <DailyTemperature {...mook} />
+        <DailyTemperature {...mock} />
       </ThemeProvider>
     );
 
@@ -52,7 +52,7 @@ describe('DailyTemperature Component', () => {
   it('renders correctly day', () => {
     const { debug } = render(
       <ThemeProvider theme={theme}>
-        <DailyTemperature {...mook} />
+        <DailyTemperature {...mock} />
       </ThemeProvider>
     );
 
